@@ -24,8 +24,8 @@ SEO =
   set: (options, clearBefore=true) ->
     @clearAll() if clearBefore
 
-    currentRouter = Router.current()
-    url = Router.url(currentRouter.route.getName(), currentRouter.params) if currentRouter
+    #currentRouter = Router.current()
+    #url = Router.url(currentRouter.route.getName(), currentRouter.params) if currentRouter
     #SEO.set({url: Router.url(currentRouter.route.name, currentRouter.params)})
 
     meta = options.meta
@@ -37,8 +37,6 @@ SEO =
 
     if options.url
       @setUrl options.url
-    else if url
-      @setUrl url
 
     # set meta
     if meta and _.isArray(meta)
@@ -154,23 +152,23 @@ SEO =
 escapeHtmlAttribute = (string) ->
   return ("" + string).replace(/'/g, "&apos;").replace(/"/g, "&quot;")
 
-getCurrentRouteName = ->
-  router = Router.current()
-  return unless router
-  routeName = router.route.getName()
-  return routeName
-
-# Get seo settings depending on route
-Deps.autorun( ->
-  currentRouteName = getCurrentRouteName()
-  return unless currentRouteName
-  Meteor.subscribe('seoByRouteName', currentRouteName)
-)
-
-# Set seo settings depending on route
-Deps.autorun( ->
-  return unless SEO
-  currentRouteName = getCurrentRouteName()
-  settings = SeoCollection.findOne({route_name: currentRouteName}) or {}
-  SEO.set(settings)
-)
+# getCurrentRouteName = ->
+#   router = Router.current()
+#   return unless router
+#   routeName = router.route.getName()
+#   return routeName
+#
+# # Get seo settings depending on route
+# Deps.autorun( ->
+#   currentRouteName = getCurrentRouteName()
+#   return unless currentRouteName
+#   Meteor.subscribe('seoByRouteName', currentRouteName)
+# )
+#
+# # Set seo settings depending on route
+# Deps.autorun( ->
+#   return unless SEO
+#   currentRouteName = getCurrentRouteName()
+#   settings = SeoCollection.findOne({route_name: currentRouteName}) or {}
+#   SEO.set(settings)
+# )
