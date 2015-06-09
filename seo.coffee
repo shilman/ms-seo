@@ -6,7 +6,7 @@ SEO =
     og: []
     twitter: []
     ignore:
-      meta: ['fragment']
+      meta: ['fragment', 'viewport']
       link: ['stylesheet', 'icon', 'apple-touch-icon']
     auto:
       twitter: true
